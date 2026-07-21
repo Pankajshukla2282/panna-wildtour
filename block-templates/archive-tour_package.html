@@ -1,0 +1,28 @@
+<!-- wp:template-part {"slug":"header","theme":"panna-wildtour","tagName":"header","className":"site-header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"site-main site-wrapper"} -->
+<div class="wp-block-group site-main site-wrapper">
+    <!-- wp:heading {"level":1} -->
+    <h1>Tour Packages</h1>
+    <!-- /wp:heading -->
+    <!-- wp:paragraph -->
+    <p>Explore safari packages, wildlife tours, and booking bundles for Panna National Park.</p>
+    <!-- /wp:paragraph -->
+    <!-- wp:query {"queryId":0,"query":{"perPage":10,"pages":0,"offset":0,"postType":"tour_package","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"displayLayout":{"type":"list","columns":1}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template -->
+        <!-- wp:group {"className":"package-card"} -->
+        <div class="wp-block-group package-card">
+            <!-- wp:post-featured-image {"isLink":true} /-->
+            <!-- wp:post-title {"level":3} /-->
+            <!-- wp:post-excerpt /-->
+            <!-- wp:read-more {"content":"View Package"} /-->
+        </div>
+        <!-- /wp:group -->
+        <!-- /wp:post-template -->
+    </div>
+    <!-- /wp:query -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","theme":"panna-wildtour","tagName":"footer","className":"site-footer"} /-->

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">Panna National Park safari scene</title>
+  <rect width="1200" height="800" fill="#eaf6eb"/>
+  <circle cx="200" cy="180" r="90" fill="#f8e7c6"/>
+  <path d="M0 420 C 250 340 350 540 620 460 C 900 380 1060 540 1200 480 L1200 800 L0 800 Z" fill="#d5e3c3"/>
+  <path d="M320 520 C 360 510 420 500 470 560 C 520 620 620 660 680 620 C 740 580 780 580 820 560" stroke="#1f5a32" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <path d="M620 460 C 660 435 700 440 740 470 C 780 500 770 530 740 560 C 710 590 660 590 630 560 C 600 530 590 490 620 460" fill="#ffffff" opacity="0.9"/>
+  <text x="1050" y="760" font-family="Inter, sans-serif" font-size="42" fill="#1f5a32">Panna Tour</text>
+</svg>

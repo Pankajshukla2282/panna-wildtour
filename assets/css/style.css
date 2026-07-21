@@ -1,0 +1,9 @@
+/* Editor styles for Panna Wild Tour */
+body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.editor-styles-wrapper {
+    color: #222222;
+    line-height: 1.7;
+}

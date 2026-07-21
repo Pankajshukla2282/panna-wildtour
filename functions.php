@@ -1,68 +1,204 @@
 <?php
+/**
+ * Panna Wild Tour functions and definitions
+ *
+ * @package Panna_Wild_Tour
+ */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-add_action('after_setup_theme', function () {
-    add_theme_support('wp-block-styles');
-    add_theme_support('responsive-embeds');
-    add_theme_support('editor-styles');
-    add_theme_support('align-wide');
-    add_theme_support('custom-logo');
-    add_theme_support('post-thumbnails');
-    add_theme_support('title-tag');
-    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
-});
+function panna_wildtour_theme_setup() {
+    load_theme_textdomain( 'panna-wildtour', get_template_directory() . '/languages' );
 
-add_action('wp_enqueue_scripts', function () {
-    $version = wp_get_theme()->get('Version');
+    add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'custom-logo' );
+    add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style' ) );
+    add_theme_support( 'responsive-embeds' );
+    add_theme_support( 'wp-block-styles' );
+    add_theme_support( 'align-wide' );
+    add_theme_support( 'editor-styles' );
 
-    wp_enqueue_style(
-        'panna-global',
-        get_theme_file_uri('/assets/css/global.css'),
-        [],
-        $version
-    );
+    register_nav_menus( array(
+        'primary' => esc_html__( 'Primary Menu', 'panna-wildtour' ),
+        'footer'  => esc_html__( 'Footer Menu', 'panna-wildtour' ),
+    ) );
 
-    wp_enqueue_style(
-        'panna-header',
-        get_theme_file_uri('/assets/css/header.css'),
-        ['panna-global'],
-        $version
-    );
+    add_theme_support( 'custom-line-height' );
+    add_editor_style( array( 'assets/css/style.css', 'assets/css/editor-style.css' ) );
+}
+add_action( 'after_setup_theme', 'panna_wildtour_theme_setup' );
 
-    wp_enqueue_script(
-        'panna-header',
-        get_theme_file_uri('/assets/js/header.js'),
-        [],
-        $version,
-        true
-    );
-});
+function panna_wildtour_block_editor_styles() {
+    wp_enqueue_style( 'panna-wildtour-block-editor-styles', get_theme_file_uri( '/assets/css/editor-style.css' ), array(), wp_get_theme()->get( 'Version' ) );
+}
+add_action( 'enqueue_block_editor_assets', 'panna_wildtour_block_editor_styles' );
 
-add_action('init', function () {
-    $patterns = [
-        'hero',
-        'booking-cta',
-        'featured-packages',
-        'why-us',
-        'explore-panna',
-        'resorts',
-        'gallery',
-        'testimonials',
-        'faq',
-        'blog',
-        'newsletter',
-        'contact',
-        'footer-cta',
-    ];
+function panna_wildtour_scripts() {
+    wp_enqueue_style( 'panna-wildtour-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+    wp_enqueue_script( 'panna-wildtour-theme', get_theme_file_uri( '/assets/js/theme.js' ), array(), filemtime( get_stylesheet_directory() . '/assets/js/theme.js' ), true );
+}
+add_action( 'wp_enqueue_scripts', 'panna_wildtour_scripts' );
 
-    foreach ($patterns as $pattern) {
-        register_block_pattern(
-            'panna/' . $pattern,
-            require get_theme_file_path("/patterns/{$pattern}.php")
-        );
+function panna_wildtour_widgets_init() {
+    register_sidebar( array(
+        'name'          => esc_html__( 'Primary Sidebar', 'panna-wildtour' ),
+        'id'            => 'sidebar-1',
+        'description'   => esc_html__( 'Add widgets here for blog and page sidebar content.', 'panna-wildtour' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+
+    register_sidebar( array(
+        'name'          => esc_html__( 'Header Ad Slot', 'panna-wildtour' ),
+        'id'            => 'header-ad',
+        'description'   => esc_html__( 'Display a header advertisement or announcement.', 'panna-wildtour' ),
+        'before_widget' => '<div class="widget ad-slot" id="%1$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+
+    register_sidebar( array(
+        'name'          => esc_html__( 'Footer Ad Slot', 'panna-wildtour' ),
+        'id'            => 'footer-ad',
+        'description'   => esc_html__( 'Display a footer advertisement or promotion.', 'panna-wildtour' ),
+        'before_widget' => '<div class="widget ad-slot" id="%1$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'panna_wildtour_widgets_init' );
+
+require get_template_directory() . '/inc/bookings.php';
+require get_template_directory() . '/inc/schema.php';
+require get_template_directory() . '/inc/email-template.php';
+
+function panna_wildtour_meta_description() {
+    if ( is_singular() ) {
+        $description = get_the_excerpt();
+    } else {
+        $description = get_bloginfo( 'description' );
     }
-});
 
+    if ( empty( $description ) ) {
+        $description = esc_html__( 'Panna Wild Tours is your trusted partner for Panna tiger reserve safaris, local attractions, tours and bookings in Madhya Pradesh.', 'panna-wildtour' );
+    }
+
+    echo '<meta name="description" content="' . esc_attr( wp_strip_all_tags( $description ) ) . '" />' . "\n";
+}
+add_action( 'wp_head', 'panna_wildtour_meta_description' );
+
+function panna_wildtour_search_form( $form ) {
+    $form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">';
+    $form .= '<label><span class="screen-reader-text">' . esc_html__( 'Search for:', 'panna-wildtour' ) . '</span>';
+    $form .= '<input type="search" class="search-field" placeholder="' . esc_attr__( 'Search …', 'panna-wildtour' ) . '" value="' . get_search_query() . '" name="s" />';
+    $form .= '</label>';
+    $form .= '<button type="submit" class="search-submit">' . esc_html__( 'Search', 'panna-wildtour' ) . '</button>';
+    $form .= '</form>';
+    return $form;
+}
+add_filter( 'get_search_form', 'panna_wildtour_search_form' );
+
+function panna_wildtour_customize_register( $wp_customize ) {
+    $wp_customize->add_section( 'pwt_frontpage', array(
+        'title'       => esc_html__( 'Homepage Settings', 'panna-wildtour' ),
+        'priority'    => 160,
+        'description' => esc_html__( 'Customize the homepage hero section and feature highlights.', 'panna-wildtour' ),
+    ) );
+
+    $wp_customize->add_setting( 'pwt_hero_title', array(
+        'default'           => esc_html__( 'Live the Nature at Panna Wild Tour', 'panna-wildtour' ),
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'pwt_hero_title', array(
+        'label'   => esc_html__( 'Hero Title', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'pwt_hero_text', array(
+        'default'           => esc_html__( 'Discover tiger safaris, wildlife tours, and cultural trips around Panna National Park with experienced guides and trusted local services.', 'panna-wildtour' ),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+
+    $wp_customize->add_control( 'pwt_hero_text', array(
+        'label'   => esc_html__( 'Hero Text', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'textarea',
+    ) );
+
+    $wp_customize->add_setting( 'pwt_contact_phone', array(
+        'default'           => '+91 98765 43210',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'pwt_contact_phone', array(
+        'label'   => esc_html__( 'Contact Phone', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'pwt_contact_email', array(
+        'default'           => 'info@pannawildtour.com',
+        'sanitize_callback' => 'sanitize_email',
+    ) );
+
+    $wp_customize->add_control( 'pwt_contact_email', array(
+        'label'   => esc_html__( 'Contact Email', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'email',
+    ) );
+
+    $wp_customize->add_setting( 'pwt_upi_id', array(
+        'default'           => esc_html__( 'pannawildtour@okaxis', 'panna-wildtour' ),
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'pwt_upi_id', array(
+        'label'   => esc_html__( 'UPI ID', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'text',
+    ) );
+
+    $wp_customize->add_setting( 'pwt_whatsapp_number', array(
+        'default'           => esc_html__( '+91 98765 43210', 'panna-wildtour' ),
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'pwt_whatsapp_number', array(
+        'label'   => esc_html__( 'WhatsApp / Contact Number', 'panna-wildtour' ),
+        'section' => 'pwt_frontpage',
+        'type'    => 'text',
+    ) );
+}
+add_action( 'customize_register', 'panna_wildtour_customize_register' );
+
+function panna_wildtour_custom_logo() {
+    if ( has_custom_logo() ) {
+        the_custom_logo();
+    } else {
+        echo '<a class="site-title" href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a>';
+    }
+}
+
+function panna_wildtour_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'panna_wildtour_excerpt_length', 999 );
+
+function panna_wildtour_add_slug_body_class( $classes ) {
+    if ( is_singular() ) {
+        global $post;
+        $classes[] = 'page-' . $post->post_name;
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'panna_wildtour_add_slug_body_class' );
