@@ -202,3 +202,88 @@ function panna_wildtour_add_slug_body_class( $classes ) {
     return $classes;
 }
 add_filter( 'body_class', 'panna_wildtour_add_slug_body_class' );
+
+function panna_wildtour_handle_contact_submission() {
+    if ( ! isset( $_POST['action'] ) || 'pwt_submit_contact' !== $_POST['action'] ) {
+        return;
+    }
+
+    $name    = sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) );
+    $email   = sanitize_email( wp_unslash( $_POST['email'] ?? '' ) );
+    $message = sanitize_textarea_field( wp_unslash( $_POST['message'] ?? '' ) );
+
+    if ( empty( $name ) || empty( $email ) || empty( $message ) ) {
+        wp_safe_redirect( wp_get_referer() ?: home_url( '/' ) );
+        exit;
+    }
+
+    $admin_email = get_bloginfo( 'admin_email' );
+    $subject     = sprintf( 'Contact form: %s', $name );
+    $body        = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+
+    wp_mail( $admin_email, $subject, $body );
+
+    wp_safe_redirect( add_query_arg( 'contact_sent', '1', wp_get_referer() ?: home_url( '/' ) ) );
+    exit;
+}
+add_action( 'admin_post_nopriv_pwt_submit_contact', 'panna_wildtour_handle_contact_submission' );
+add_action( 'admin_post_pwt_submit_contact', 'panna_wildtour_handle_contact_submission' );
+
+/**
+ * Create default pages on theme activation if they don't exist.
+ */
+function panna_wildtour_create_default_pages() {
+    if ( get_option( 'pwt_default_pages_created' ) ) {
+        return;
+    }
+
+    $pages = array(
+        'about-us'         => 'About Us',
+        'contact-us'       => 'Contact Us',
+        'services'         => 'Services',
+        'attractions'      => 'Attractions',
+        'booking'          => 'Booking',
+        'more-information' => 'More Information',
+    );
+
+    foreach ( $pages as $slug => $title ) {
+        // Skip if a page with this path already exists.
+        if ( get_page_by_path( $slug ) ) {
+            continue;
+        }
+
+        $content = '';
+
+        switch ( $slug ) {
+            case 'about-us':
+                $content = 'Learn about Panna Wild Tour, our mission, team and how we help visitors experience the Panna jungles.';
+                break;
+            case 'contact-us':
+                $content = 'Get in touch with us for bookings, queries and support.';
+                break;
+            case 'services':
+                $content = 'Explore our guided safaris, logistics, on-demand and special services around Panna.';
+                break;
+            case 'attractions':
+                $content = 'Highlights around Panna: Panna Tiger Reserve, Ken river, waterfalls, plateaus and local temples.';
+                break;
+            case 'booking':
+                $content = 'Book your safari package. Use the booking page to select packages and submit your details.';
+                break;
+            case 'more-information':
+                $content = 'Read our latest posts and wildlife stories from Panna.';
+                break;
+        }
+
+        wp_insert_post( array(
+            'post_title'   => wp_strip_all_tags( $title ),
+            'post_name'    => $slug,
+            'post_content' => $content,
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+        ) );
+    }
+
+    update_option( 'pwt_default_pages_created', 1 );
+}
+add_action( 'after_switch_theme', 'panna_wildtour_create_default_pages' );
