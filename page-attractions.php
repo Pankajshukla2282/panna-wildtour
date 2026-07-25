@@ -10,31 +10,43 @@ get_header();
 <main id="content" class="site-main site-wrapper page-attractions">
     <section class="section">
         <div class="section-header">
-            <h1>Attractions Around Panna</h1>
-            <p>Panna is known for its dry deciduous forest, plateaus, gorges, waterfalls and the Ken river — home to diverse wildlife and ancient temples.</p>
+            <h1><?php esc_html_e( 'Attractions Around Panna', 'panna-wildtour' ); ?></h1>
+            <p><?php esc_html_e( 'Panna combines wildlife, river landscapes, and heritage circuits, making it ideal for both short and extended nature trips.', 'panna-wildtour' ); ?></p>
+        </div>
+
+        <div class="entry-content page-intro-content">
+            <?php while ( have_posts() ) : the_post(); ?>
+                <?php the_content(); ?>
+            <?php endwhile; ?>
         </div>
 
         <div class="attraction-list">
             <article>
-                <h3>Panna Tiger Reserve</h3>
-                <p>The core attraction — a protected area covering over 540 sq. km, with teak forests, grasslands and the Ken river where tigers, leopards, sloth bears and many birds thrive.</p>
+                <h3><?php esc_html_e( 'Panna Tiger Reserve', 'panna-wildtour' ); ?></h3>
+                <p><?php esc_html_e( 'The region’s flagship attraction with rich biodiversity and multiple safari routes known for tiger, leopard, and birdlife activity.', 'panna-wildtour' ); ?></p>
             </article>
 
             <article>
-                <h3>Ken River</h3>
-                <p>A lifeline for the region, the Ken River offers scenic riverbank safaris and is often the backdrop for tiger and wild life sightings.</p>
+                <h3><?php esc_html_e( 'Ken River Corridor', 'panna-wildtour' ); ?></h3>
+                <p><?php esc_html_e( 'A scenic ecosystem passing through forest terrain, ideal for landscape viewing and wildlife movement observation.', 'panna-wildtour' ); ?></p>
             </article>
 
             <article>
-                <h3>Waterfalls & Plateaus</h3>
-                <p>Explore seasonal waterfalls, rocky plateaus and gorges — perfect for nature photography and short treks.</p>
+                <h3><?php esc_html_e( 'Waterfalls and Canyons', 'panna-wildtour' ); ?></h3>
+                <p><?php esc_html_e( 'Nearby natural formations and seasonal falls provide strong half-day excursion options beyond safari sessions.', 'panna-wildtour' ); ?></p>
             </article>
 
             <article>
-                <h3>Temples and Cultural Sites</h3>
-                <p>Panna town is home to several ancient temples and local cultural attractions that can be combined with your wildlife trip.</p>
+                <h3><?php esc_html_e( 'Temple and Heritage Circuits', 'panna-wildtour' ); ?></h3>
+                <p><?php esc_html_e( 'Visitors can combine wildlife tours with nearby spiritual and heritage points for a balanced local itinerary.', 'panna-wildtour' ); ?></p>
             </article>
         </div>
+
+        <?php if ( shortcode_exists( 'pwt_destinations' ) ) : ?>
+            <div class="section">
+                <?php echo do_shortcode( '[pwt_destinations]' ); ?>
+            </div>
+        <?php endif; ?>
     </section>
 </main>
 <?php get_footer();

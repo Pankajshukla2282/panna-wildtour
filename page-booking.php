@@ -11,6 +11,31 @@ Template Name: Booking Page
 
 get_header();
 
+if ( function_exists( 'panna_wildtour_has_pwt_plugin' ) && panna_wildtour_has_pwt_plugin() ) {
+    $has_booking_shortcode = shortcode_exists( 'pwt_booking_form' );
+    $has_payment_shortcode = shortcode_exists( 'pwt_payment_page' );
+
+    if ( $has_booking_shortcode || $has_payment_shortcode ) {
+        ?>
+        <main id="content" class="site-main site-wrapper page-booking">
+            <section class="section">
+                <?php if ( $has_booking_shortcode ) : ?>
+                    <?php echo do_shortcode( '[pwt_booking_form]' ); ?>
+                <?php endif; ?>
+
+                <?php if ( $has_payment_shortcode ) : ?>
+                    <div class="section" style="padding-top: 1.5rem;">
+                        <?php echo do_shortcode( '[pwt_payment_page]' ); ?>
+                    </div>
+                <?php endif; ?>
+            </section>
+        </main>
+        <?php
+        get_footer();
+        return;
+    }
+}
+
 $selected_package_id = absint( $_GET['package'] ?? 0 );
 $packages            = panna_wildtour_get_available_packages();
 $upi_id              = get_theme_mod( 'pwt_upi_id', 'pannawildtour@okaxis' );

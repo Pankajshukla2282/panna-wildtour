@@ -7,6 +7,14 @@
 
 get_header();
 
+if ( function_exists( 'panna_wildtour_has_pwt_plugin' ) && panna_wildtour_has_pwt_plugin() && shortcode_exists( 'pwt_homepage' ) ) {
+    echo '<main id="content" class="site-main">';
+    echo do_shortcode( '[pwt_homepage]' );
+    echo '</main>';
+    get_footer();
+    return;
+}
+
 $hero_title = get_theme_mod( 'pwt_hero_title', esc_html__( 'Live the Nature at Panna Wild Tour', 'panna-wildtour' ) );
 $hero_text  = get_theme_mod( 'pwt_hero_text', esc_html__( 'Discover tiger safaris, wildlife tours, and cultural trips around Panna National Park with experienced guides and trusted local services.', 'panna-wildtour' ) );
 $hero_phone = get_theme_mod( 'pwt_contact_phone', '+91 98765 43210' );

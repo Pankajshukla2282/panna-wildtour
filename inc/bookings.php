@@ -9,7 +9,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+function panna_wildtour_package_post_type() {
+    return post_type_exists( 'pwt_package' ) ? 'pwt_package' : 'tour_package';
+}
+
+function panna_wildtour_booking_post_type() {
+    return post_type_exists( 'pwt_booking' ) ? 'pwt_booking' : 'tour_booking';
+}
+
 function panna_wildtour_register_post_types() {
+    if ( function_exists( 'panna_wildtour_has_pwt_plugin' ) && panna_wildtour_has_pwt_plugin() ) {
+        return;
+    }
+
     register_post_type( 'tour_package', array(
         'labels' => array(
             'name'               => esc_html__( 'Tour Packages', 'panna-wildtour' ),
@@ -49,6 +61,10 @@ function panna_wildtour_register_post_types() {
 add_action( 'init', 'panna_wildtour_register_post_types' );
 
 function panna_wildtour_package_meta_boxes() {
+    if ( 'tour_package' !== panna_wildtour_package_post_type() ) {
+        return;
+    }
+
     add_meta_box(
         'pwt_package_details',
         esc_html__( 'Package Details', 'panna-wildtour' ),
@@ -83,6 +99,10 @@ function panna_wildtour_package_meta_box_callback( $post ) {
 }
 
 function panna_wildtour_save_package_meta( $post_id ) {
+    if ( 'tour_package' !== get_post_type( $post_id ) ) {
+        return;
+    }
+
     if ( ! isset( $_POST['pwt_package_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pwt_package_meta_nonce'] ) ), 'pwt_package_meta' ) ) {
         return;
     }
@@ -106,6 +126,10 @@ function panna_wildtour_save_package_meta( $post_id ) {
 add_action( 'save_post_tour_package', 'panna_wildtour_save_package_meta' );
 
 function panna_wildtour_handle_booking_submission() {
+    if ( 'tour_booking' !== panna_wildtour_booking_post_type() ) {
+        return;
+    }
+
     if ( ! isset( $_POST['pwt_booking_submit'] ) || ! is_page_template( 'page-booking.php' ) ) {
         return;
     }
@@ -184,7 +208,7 @@ add_action( 'template_redirect', 'panna_wildtour_handle_booking_submission' );
 
 function panna_wildtour_get_available_packages() {
     $args = array(
-        'post_type'      => 'tour_package',
+        'post_type'      => panna_wildtour_package_post_type(),
         'posts_per_page' => -1,
         'post_status'    => 'publish',
         'orderby'        => 'date',
@@ -214,10 +238,21 @@ function panna_wildtour_get_available_packages() {
 }
 
 function panna_wildtour_get_package_price( $post_id ) {
+    if ( 'pwt_package' === get_post_type( $post_id ) ) {
+        $offer = get_post_meta( $post_id, 'offer_price', true );
+        $base  = get_post_meta( $post_id, 'regular_price', true );
+
+        return $offer ? $offer : $base;
+    }
+
     return get_post_meta( $post_id, 'pwt_package_price', true );
 }
 
 function panna_wildtour_get_package_duration( $post_id ) {
+    if ( 'pwt_package' === get_post_type( $post_id ) ) {
+        return (string) get_post_meta( $post_id, 'duration', true );
+    }
+
     return get_post_meta( $post_id, 'pwt_package_duration', true );
 }
 
@@ -227,6 +262,11 @@ function panna_wildtour_get_page_url( $slug ) {
 }
 
 function panna_wildtour_dashboard_bookings_widget() {
+    if ( 'tour_booking' !== panna_wildtour_booking_post_type() ) {
+        echo '<p>' . esc_html__( 'Plugin booking dashboard is active. Use Panna Wild Tour admin menu for booking analytics.', 'panna-wildtour' ) . '</p>';
+        return;
+    }
+
     $total_bookings   = wp_count_posts( 'tour_booking' )->publish;
     $pending_count    = new WP_Query( array(
         'post_type'      => 'tour_booking',
