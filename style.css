@@ -3,12 +3,13 @@ Theme Name: Panna Wild Tour
 Theme URI: https://www.pannawildtour.com/
 Author: Panna Wild Tour
 Author URI: https://www.pannawildtour.com/
-Description: A clean, responsive WordPress theme for wildlife tours, attractions, services, blogs, bookings and nature experiences around Panna.
+Description: A clean, responsive WordPress theme for wildlife tours, attractions, services, blogs, bookings and nature experiences around Panna. Child theme of Getwid.
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: panna-wildtour
 Domain Path: /languages
+Template: getwid-base
 Tags: block-styles, custom-logo, custom-menu, featured-images, responsive-layout, blog, translation-ready
 */
 

@@ -45,12 +45,17 @@ function panna_wildtour_block_editor_styles() {
 add_action( 'enqueue_block_editor_assets', 'panna_wildtour_block_editor_styles' );
 
 function panna_wildtour_scripts() {
+
+    $parenthandle   = 'getwid-base-style';
+    $theme          = wp_get_theme();
+
     $theme_version = wp_get_theme()->get( 'Version' );
     $script_path   = get_stylesheet_directory() . '/assets/js/theme.js';
     $script_ver    = file_exists( $script_path ) ? (string) filemtime( $script_path ) : $theme_version;
 
-    wp_enqueue_style( 'panna-wildtour-style', get_stylesheet_uri(), array(), $theme_version );
-    wp_enqueue_script( 'panna-wildtour-theme', get_theme_file_uri( '/assets/js/theme.js' ), array(), $script_ver, true );
+    wp_enqueue_style( $parenthandle, esc_url_raw( get_template_directory_uri() . '/style.css' ), array(), $theme->parent()->get( 'Version' ));
+    wp_enqueue_style( 'panna-wildtour-style', esc_url_raw( get_stylesheet_uri() ), array( $parenthandle ), $theme_version );
+    wp_enqueue_script( 'panna-wildtour-theme', esc_url_raw( get_theme_file_uri( '/assets/js/theme.js' ) ), array(), $script_ver, true );
 }
 add_action( 'wp_enqueue_scripts', 'panna_wildtour_scripts' );
 
