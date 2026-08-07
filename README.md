@@ -1,35 +1,31 @@
 # Panna Wild Tours Child Theme
 
-This child theme is built for the Panna Wild Tour website and extends the Getwid Base WordPress theme with branding, layout, and content-specific styling.
+This child theme extends wildtours-base-theme and is aligned to work with the panna-wild-tour plugin.
 
-## Included customizations
+## Purpose
 
-- Theme metadata updated to reflect the live site and brand.
-- Child theme support for translations and modern HTML5 features.
-- Custom styles in `css/wildtours.css` to refine typography, header layout, buttons, and widget surfaces.
-- Child theme JavaScript in `js/wildtours.js` for smooth in-page navigation.
-- Theme structure uses `Template: getwid-base` as the parent theme.
+- Keep parent theme updates safe while applying Panna-specific branding and template overrides.
+- Reuse plugin text domain and naming conventions (`panna-wild-tour`, `pwt_*`).
 
-## Brand information
+## Current child-theme setup
 
-- Site: https://www.pannawildtour.com/
-- Tagline: Live the Nature!
-- Contact: Support@pannawildtour.com
-- Phone: +91 992184....
-- Address: Panna Wild Tour, Madla Gate, Madla, Panna, Madhya Pradesh, India
+- Parent theme template: `wildtours-base-theme`
+- Child bootstrap: `functions.php`
+- Child fallback template: `index.php`
+- Child global configuration: `theme.json`
 
-## Best practices applied
+## Optional override assets
 
-- Uses WordPress hooks and action callbacks for setup and asset loading.
-- Loads the parent theme stylesheet before the child theme stylesheet.
-- Uses file modification time for custom asset versioning to aid browser cache invalidation.
-- Includes safe text output for translation-ready text strings.
-- Uses CSS custom properties for consistent color branding and accessible focus styles.
-- Includes a starter translation template at `languages/wildtours.pot`.
+If present, these files are automatically loaded by the child theme:
 
-## Development notes
+- `assets/css/frontend.css`
+- `assets/js/frontend.js`
 
-- Place any additional child theme templates in the root folder.
-- Add translations to the `languages/` directory when ready.
-- Keep custom markup and presentation logic out of the parent theme by using child theme helpers.
+## Plugin alignment
+
+- Plugin slug: `panna-wild-tour`
+- Plugin text domain: `panna-wild-tour`
+- Common plugin post types: `pwt_package`, `pwt_safari`, `pwt_destination`, `pwt_booking`
+
+Use child template overrides (for example, custom archive/single templates) only when you need presentation changes on top of plugin output.
 

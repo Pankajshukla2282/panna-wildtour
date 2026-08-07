@@ -2,81 +2,32 @@
   "$schema": "https://schemas.wp.org/trunk/theme.json",
   "version": 2,
   "settings": {
+    "layout": {
+      "contentSize": "860px",
+      "wideSize": "1200px"
+    },
     "color": {
-      "custom": true,
-      "customGradient": true,
-      "defaultPalette": false,
       "palette": [
         {
-          "slug": "forest-green",
+          "slug": "pwt-forest",
           "color": "#1f5a32",
-          "name": "Forest Green"
+          "name": "PWT Forest"
         },
         {
-          "slug": "soft-cream",
-          "color": "#faf9f4",
-          "name": "Soft Cream"
-        },
-        {
-          "slug": "dark-charcoal",
-          "color": "#122613",
-          "name": "Dark Charcoal"
-        },
-        {
-          "slug": "muted-olive",
-          "color": "#5f5f5f",
-          "name": "Muted Olive"
+          "slug": "pwt-earth",
+          "color": "#d97706",
+          "name": "PWT Earth"
         }
       ]
-    },
-    "typography": {
-      "fontFamilies": [
-        {
-          "fontFamily": "Inter, system-ui, sans-serif",
-          "name": "Inter",
-          "slug": "inter"
-        }
-      ],
-      "customFontSize": true,
-      "dropCap": true
-    },
-    "layout": {
-      "contentSize": "1180px",
-      "wideSize": "1440px"
-    },
-    "spacing": {
-      "customPadding": true,
-      "customMargin": true
     }
   },
   "styles": {
-    "color": {
-      "background": "var(--wp--preset--color--soft-cream)",
-      "text": "var(--wp--preset--color--dark-charcoal)"
-    },
     "elements": {
-      "h1": {"color": "var(--wp--preset--color--dark-charcoal)"},
-      "h2": {"color": "var(--wp--preset--color--dark-charcoal)"}
-    }
-  },
-  "templates": {
-    "index": {
-      "templateParts": [ "header", "footer" ]
-    },
-    "page": {
-      "templateParts": [ "header", "footer" ]
-    },
-    "single": {
-      "templateParts": [ "header", "footer" ]
-    },
-    "404": {
-      "templateParts": [ "header", "footer" ]
-    },
-    "single-tour_package": {
-      "templateParts": [ "header", "footer" ]
-    },
-    "archive-tour_package": {
-      "templateParts": [ "header", "footer" ]
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--pwt-forest)"
+        }
+      }
     }
   }
 }
