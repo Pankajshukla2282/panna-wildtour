@@ -32,3 +32,37 @@ If present, these files are automatically loaded by the child theme:
 
 Use child template overrides (for example, custom archive/single templates) only when you need presentation changes on top of plugin output.
 
+## Sidebar fallback behavior
+
+The child theme uses context-aware sidebars (`pwt-sidebar-*`) for blog, package, safari, destination, and homepage views.
+
+If a contextual sidebar has no assigned widgets, the child theme can render optional fallback content (travel CTA/contact snippets) instead of leaving the area empty.
+
+### Control the fallback with a filter
+
+Use the `pwt_child/sidebar_fallback_enabled` filter to disable or customize this behavior per sidebar id.
+
+```php
+add_filter('pwt_child/sidebar_fallback_enabled', static function (bool $enabled, string $sidebarId): bool {
+	// Example: disable fallback only for blog sidebar.
+	if ($sidebarId === 'pwt-sidebar-blog') {
+		return false;
+	}
+
+	return $enabled;
+}, 10, 2);
+```
+
+Recommended placement: child theme `functions.php` or a site-specific mini plugin.
+
+## Archive filter persistence
+
+Travel archive filters are persisted across pagination in child templates.
+
+This means when visitors select filters (for example season, package category, or safari zone), those selections are automatically kept when they move to page 2, 3, and so on.
+
+Implementation note:
+
+- Pagination links are generated with allowed query args from `pwt_child_current_filter_args()` in `inc/query-filters.php`.
+- Templates use `pwt_child_render_filtered_pagination()` to ensure state-safe links.
+
