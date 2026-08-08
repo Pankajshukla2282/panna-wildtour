@@ -14,6 +14,11 @@ if (file_exists($pwtChildBlockFeatures)) {
     require_once $pwtChildBlockFeatures;
 }
 
+$pwtChildSidebars = get_stylesheet_directory() . '/inc/sidebars.php';
+if (file_exists($pwtChildSidebars)) {
+    require_once $pwtChildSidebars;
+}
+
 /**
  * Detect whether the Panna Wild Tour plugin is active.
  */
