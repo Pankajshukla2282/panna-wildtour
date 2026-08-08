@@ -2,7 +2,7 @@
 /**
  * Panna Wild Tours child theme bootstrap.
  *
- * @package panna-wild-tour
+ * @package wildtours-plugin
  */
 
 declare(strict_types=1);
@@ -27,7 +27,7 @@ function pwt_child_is_plugin_active(): bool
  */
 function pwt_child_plugin_templates_path(): string
 {
-    return WP_PLUGIN_DIR . '/panna-wild-tour/public/templates/';
+    return WP_PLUGIN_DIR . '/wildtours-plugin/public/templates/';
 }
 
 /**
@@ -125,7 +125,7 @@ function pwt_child_resolve_template(string $template): string
 }
 
 add_action('after_setup_theme', static function (): void {
-    load_child_theme_textdomain('panna-wild-tour', get_stylesheet_directory() . '/languages');
+    load_child_theme_textdomain('wildtours-plugin', get_stylesheet_directory() . '/languages');
 
     add_theme_support('align-wide');
     add_theme_support('wp-block-styles');

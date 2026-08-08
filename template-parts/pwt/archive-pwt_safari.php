@@ -2,7 +2,7 @@
 /**
  * Child override: PWT safari archive.
  *
- * @package panna-wild-tour
+ * @package wildtours-plugin
  */
 
 defined('ABSPATH') || exit;
@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 get_header();
 
 $queriedObject = get_queried_object();
-$title = post_type_archive_title('', false) ?: __('Safari Experiences', 'panna-wild-tour');
+$title = post_type_archive_title('', false) ?: __('Safari Experiences', 'wildtours-plugin');
 $actionUrl = get_post_type_archive_link('pwt_safari');
 $filters = [
     'safari_zone' => get_terms(['taxonomy' => 'pwt_safari_zone', 'hide_empty' => true]),
@@ -32,7 +32,7 @@ $filters = [
                     <label>
                         <span><?php echo esc_html(ucwords(str_replace('_', ' ', $queryVar))); ?></span>
                         <select name="<?php echo esc_attr($queryVar); ?>">
-                            <option value=""><?php esc_html_e('All', 'panna-wild-tour'); ?></option>
+                            <option value=""><?php esc_html_e('All', 'wildtours-plugin'); ?></option>
                             <?php foreach ($terms as $term) : ?>
                                 <option value="<?php echo esc_attr($term->slug); ?>" <?php selected(sanitize_text_field($_GET[$queryVar] ?? ''), $term->slug); ?>><?php echo esc_html($term->name); ?></option>
                             <?php endforeach; ?>
@@ -40,7 +40,7 @@ $filters = [
                     </label>
                 <?php endforeach; ?>
             </div>
-            <p><button type="submit" class="pwt-btn"><?php esc_html_e('Apply Filters', 'panna-wild-tour'); ?></button></p>
+            <p><button type="submit" class="pwt-btn"><?php esc_html_e('Apply Filters', 'wildtours-plugin'); ?></button></p>
         </form>
     </section>
 
@@ -55,12 +55,12 @@ $filters = [
                         <div class="pwt-card-body">
                             <h3><?php the_title(); ?></h3>
                             <p><?php echo esc_html(wp_trim_words(get_the_excerpt() ?: get_the_content(null, false), 24)); ?></p>
-                            <a class="pwt-text-link" href="<?php the_permalink(); ?>"><?php esc_html_e('View details', 'panna-wild-tour'); ?></a>
+                            <a class="pwt-text-link" href="<?php the_permalink(); ?>"><?php esc_html_e('View details', 'wildtours-plugin'); ?></a>
                         </div>
                     </article>
                 <?php endwhile; ?>
             <?php else : ?>
-                <p><?php esc_html_e('No safari experiences found for the selected filters.', 'panna-wild-tour'); ?></p>
+                <p><?php esc_html_e('No safari experiences found for the selected filters.', 'wildtours-plugin'); ?></p>
             <?php endif; ?>
         </div>
         <?php the_posts_pagination(); ?>

@@ -2,7 +2,7 @@
 /**
  * Fallback template for the child theme.
  *
- * @package panna-wild-tour
+ * @package wildtours-plugin
  */
 
 declare(strict_types=1);

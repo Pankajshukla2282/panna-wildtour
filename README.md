@@ -1,11 +1,11 @@
 # Panna Wild Tours Child Theme
 
-This child theme extends wildtours-base-theme and is aligned to work with the panna-wild-tour plugin.
+This child theme extends wildtours-base-theme and is aligned to work with the wildtours-plugin plugin.
 
 ## Purpose
 
 - Keep parent theme updates safe while applying Panna-specific branding and template overrides.
-- Reuse plugin text domain and naming conventions (`panna-wild-tour`, `pwt_*`).
+- Reuse plugin text domain and naming conventions (`wildtours-plugin`, `pwt_*`).
 
 ## Current child-theme setup
 
@@ -26,8 +26,8 @@ If present, these files are automatically loaded by the child theme:
 
 ## Plugin alignment
 
-- Plugin slug: `panna-wild-tour`
-- Plugin text domain: `panna-wild-tour`
+- Plugin slug: `wildtours-plugin`
+- Plugin text domain: `wildtours-plugin`
 - Common plugin post types: `pwt_package`, `pwt_safari`, `pwt_destination`, `pwt_booking`
 
 Use child template overrides (for example, custom archive/single templates) only when you need presentation changes on top of plugin output.

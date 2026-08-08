@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   package:
-    name: Package panna-wildtour
+    name: Package wildtours-child-theme
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          SLUG="panna-wildtour"
+          SLUG="wildtours-child-theme"
           VERSION="$(grep -iE 'Version:' style.css | head -n1 | sed -E 's/.*Version:[[:space:]]*([0-9][^[:space:];]*).*/\1/')"
           VERSION="${VERSION:-dev}"
           PKG_ROOT="${RUNNER_TEMP}/pkg"
@@ -73,20 +73,20 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: panna-wildtour-${{ env.PACKAGE_VERSION }}
+          name: wildtours-child-theme-${{ env.PACKAGE_VERSION }}
           path: ${{ runner.temp }}/pkg
           if-no-files-found: error
 
       - name: Download artifact as delivered
         uses: actions/download-artifact@v4
         with:
-          name: panna-wildtour-${{ env.PACKAGE_VERSION }}
+          name: wildtours-child-theme-${{ env.PACKAGE_VERSION }}
           path: ${{ runner.temp }}/verify
 
       - name: Verify downloaded artifact is installable
         run: |
           set -euo pipefail
-          SLUG="panna-wildtour"
+          SLUG="wildtours-child-theme"
           VERIFY="${{ runner.temp }}/verify"
           test -d "${VERIFY}/${SLUG}"
           test -f "${VERIFY}/${SLUG}/style.css"
@@ -98,5 +98,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${GITHUB_REF_NAME}" "${ZIP_PATH}" \
-            --title "panna-wildtour ${GITHUB_REF_NAME}" \
+            --title "wildtours-child-theme ${GITHUB_REF_NAME}" \
             --generate-notes || true
