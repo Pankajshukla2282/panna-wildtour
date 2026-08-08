@@ -1,0 +1,117 @@
+{
+  "site": {
+    "brand_name": "Panna Wild Tour",
+    "domain": "pannawildtour.com",
+    "locale": "en_IN"
+  },
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "seo_title": "Panna Safari Booking and Tour Packages | Panna Wild Tour",
+      "meta_description": "Book Panna Tiger Reserve safari, tour packages, and stay plans with local experts. Get quick support, transparent pricing, and customized itineraries.",
+      "hero_eyebrow": "Panna Tiger Reserve Travel Experts",
+      "hero_title": "Book Your Panna Safari With Trusted Local Experts",
+      "hero_text": "Plan safari permits, stay, transfers, and sightseeing in one place. We help you choose the right zone, timing, and package for your travel style.",
+      "primary_cta": "Book Now",
+      "secondary_cta": "Explore Packages"
+    },
+    {
+      "slug": "about-us",
+      "title": "About Panna Wild Tour",
+      "seo_title": "About Panna Wild Tour | Local Panna Safari Travel Team",
+      "meta_description": "Learn about the Panna Wild Tour team, our local expertise, and how we help travelers plan safe and memorable wildlife trips."
+    },
+    {
+      "slug": "contact-us",
+      "title": "Contact Panna Wild Tour",
+      "seo_title": "Contact Panna Wild Tour | Book Safari and Travel Support",
+      "meta_description": "Contact Panna Wild Tour for safari booking, package queries, and itinerary planning. Call, WhatsApp, or send your travel details."
+    }
+  ],
+  "pwt_package": [
+    {
+      "title": "2D/1N Panna Quick Safari Escape",
+      "excerpt": "Ideal for weekend travelers looking for one safari and a comfortable stay.",
+      "duration": "2 days / 1 night",
+      "days": 2,
+      "nights": 1,
+      "regular_price": "10999",
+      "offer_price": "9499",
+      "inclusions": "1 night stay, 1 safari booking assistance, basic itinerary support.",
+      "exclusions": "Entry fees where applicable, personal expenses, meals unless specified."
+    },
+    {
+      "title": "3D/2N Panna Family Wildlife Tour",
+      "excerpt": "Family-friendly package with balanced safari and relaxation time.",
+      "duration": "3 days / 2 nights",
+      "days": 3,
+      "nights": 2,
+      "regular_price": "16999",
+      "offer_price": "14999",
+      "inclusions": "2 night stay, safari planning support, route and sightseeing guidance.",
+      "exclusions": "Camera fee, personal expenses, optional add-on activities."
+    },
+    {
+      "title": "3D/2N Panna Photography Safari Plan",
+      "excerpt": "Designed for wildlife enthusiasts and photographers.",
+      "duration": "3 days / 2 nights",
+      "days": 3,
+      "nights": 2,
+      "regular_price": "19999",
+      "offer_price": "17999",
+      "inclusions": "2 night stay, slot strategy support, early departure coordination.",
+      "exclusions": "Special permits, equipment rental, personal expenses."
+    },
+    {
+      "title": "4D/3N Panna and Nearby Destinations Tour",
+      "excerpt": "A complete wildlife and sightseeing plan for longer stays.",
+      "duration": "4 days / 3 nights",
+      "days": 4,
+      "nights": 3,
+      "regular_price": "24999",
+      "offer_price": "22999",
+      "inclusions": "3 night stay, safari planning, nearby destination add-on guidance.",
+      "exclusions": "Monument tickets, shopping, out-of-itinerary transfers."
+    }
+  ],
+  "pwt_safari": [
+    {
+      "title": "Morning Jeep Safari - Panna",
+      "excerpt": "Early morning drive for fresh tracks and active wildlife movement.",
+      "duration": "3 to 4 hours",
+      "shift": "morning",
+      "meeting_point": "Panna Safari Gate",
+      "regular_price": "3500",
+      "offer_price": "3200"
+    },
+    {
+      "title": "Evening Jeep Safari - Panna",
+      "excerpt": "Evening light and scenic jungle landscapes with wildlife opportunities.",
+      "duration": "3 to 4 hours",
+      "shift": "evening",
+      "meeting_point": "Panna Safari Gate",
+      "regular_price": "3500",
+      "offer_price": "3200"
+    },
+    {
+      "title": "Full Day Safari Planning Support",
+      "excerpt": "Extended safari planning for deeper zone coverage and better sighting probability.",
+      "duration": "Full day",
+      "shift": "full_day",
+      "meeting_point": "As per approved route",
+      "regular_price": "12999",
+      "offer_price": "11999"
+    }
+  ],
+  "faq_items": [
+    "What is the best time to visit Panna Tiger Reserve?",
+    "Can tiger sighting be guaranteed?",
+    "How many safaris should I book for a good experience?",
+    "Are safari permits included in packages?",
+    "Do you offer custom packages?",
+    "Is transport available?",
+    "Is WhatsApp support available?",
+    "How early should I book?"
+  ]
+}
