@@ -104,8 +104,10 @@ $actionUrl = $queriedObject instanceof WP_Term ? get_term_link($queriedObject) :
                 <p><?php esc_html_e('No results found for the selected filters.', 'wildtours-plugin'); ?></p>
             <?php endif; ?>
         </div>
-        <?php the_posts_pagination(); ?>
+        <?php pwt_child_render_archive_pagination(['content_type', 'package_category', 'safari_zone', 'destination_category', 'season']); ?>
     </section>
+
+    <?php pwt_child_render_travel_sidebar(pwt_child_travel_sidebar_for_type((string) $currentPostType)); ?>
 </main>
 <?php
 get_footer();

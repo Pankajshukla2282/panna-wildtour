@@ -63,8 +63,10 @@ $filters = [
                 <p><?php esc_html_e('No packages found for the selected filters.', 'wildtours-plugin'); ?></p>
             <?php endif; ?>
         </div>
-        <?php the_posts_pagination(); ?>
+        <?php pwt_child_render_archive_pagination(['package_category', 'season']); ?>
     </section>
+
+    <?php pwt_child_render_travel_sidebar(pwt_child_travel_sidebar_for_type('pwt_package')); ?>
 </main>
 <?php
 get_footer();

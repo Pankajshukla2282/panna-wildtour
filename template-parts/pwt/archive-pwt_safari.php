@@ -63,8 +63,10 @@ $filters = [
                 <p><?php esc_html_e('No safari experiences found for the selected filters.', 'wildtours-plugin'); ?></p>
             <?php endif; ?>
         </div>
-        <?php the_posts_pagination(); ?>
+        <?php pwt_child_render_archive_pagination(['safari_zone', 'season']); ?>
     </section>
+
+    <?php pwt_child_render_travel_sidebar(pwt_child_travel_sidebar_for_type('pwt_safari')); ?>
 </main>
 <?php
 get_footer();

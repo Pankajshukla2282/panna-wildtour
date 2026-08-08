@@ -11,3 +11,31 @@ Author URI: https://www.pannawildtour.com/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+/* Travel sidebar fallback styles (scoped, no global layout overrides). */
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback {
+	background: #f9fbf8;
+	border: 1px solid #d7e3d3;
+	border-radius: 12px;
+	padding: 1rem;
+	margin: 0 0 1rem;
+}
+
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback .widget-title {
+	margin: 0 0 0.5rem;
+	color: #1f5a32;
+}
+
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback p {
+	margin: 0 0 0.75rem;
+}
+
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback .pwt-text-link {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback .pwt-text-link:hover,
+.pwt-single-wrap .pwt-travel-sidebar .pwt-widget-fallback .pwt-text-link:focus-visible {
+	text-decoration: underline;
+}

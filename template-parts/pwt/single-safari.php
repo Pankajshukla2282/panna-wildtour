@@ -41,6 +41,8 @@ while (have_posts()) : the_post();
 
             <?php echo do_shortcode('[pwt_booking_form]'); ?>
         </article>
+
+        <?php pwt_child_render_travel_sidebar(pwt_child_travel_sidebar_for_type('pwt_safari')); ?>
     </main>
     <?php
 endwhile;

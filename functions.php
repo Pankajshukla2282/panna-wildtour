@@ -19,6 +19,11 @@ if (file_exists($pwtChildSidebars)) {
     require_once $pwtChildSidebars;
 }
 
+$pwtChildArchivePagination = get_stylesheet_directory() . '/inc/archive-pagination.php';
+if (file_exists($pwtChildArchivePagination)) {
+    require_once $pwtChildArchivePagination;
+}
+
 /**
  * Detect whether the Panna Wild Tour plugin is active.
  */
