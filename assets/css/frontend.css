@@ -1,0 +1,36 @@
+/*
+Theme Name: Panna Wild Tours
+Description: Child theme frontend overrides for the Panna Wild Tour plugin experience.
+Version: 2.0.3
+Text Domain: wildtours-plugin
+*/
+
+/* Contact card refinement (scoped, gold accent used by the plugin). */
+.pwt-single-wrap .pwt-contact-card {
+	border-top-color: #c9a227;
+}
+
+.pwt-single-wrap .pwt-contact-list a {
+	font-weight: 600;
+}
+
+/* Booking form action row. */
+.pwt-booking-form .pwt-form-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.pwt-booking-form .pwt-form-actions .pwt-notes {
+	font-size: 0.85rem;
+	color: #5d6a61;
+}
+
+/* Small screens: keep CTAs tappable. */
+@media (max-width: 480px) {
+	.pwt-booking-form .pwt-form-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+}
