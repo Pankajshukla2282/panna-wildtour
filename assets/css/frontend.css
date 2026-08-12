@@ -1,7 +1,7 @@
 /*
 Theme Name: Panna Wild Tours
 Description: Child theme frontend overrides for the Panna Wild Tour plugin experience.
-Version: 2.0.3
+Version: 2.0.7
 Text Domain: wildtours-plugin
 */
 
@@ -32,5 +32,43 @@ Text Domain: wildtours-plugin
 	.pwt-booking-form .pwt-form-actions {
 		flex-direction: column;
 		align-items: stretch;
+	}
+}
+
+
+/*
+ * Header/navigation refinements.
+ * Parent navigation styles live in WildTours Base. These scoped rules
+ * provide a consistent Panna Wild Tours presentation without replacing
+ * the parent responsive behavior.
+ */
+.site-header .site-title a,
+.site-header .site-title {
+	color: #172018;
+}
+
+.site-header .site-title a:hover,
+.site-header .site-title a:focus {
+	color: #1f5a32;
+}
+
+.site-header .primary-menu > li > a {
+	font-weight: 600;
+}
+
+.site-header .primary-menu .sub-menu a {
+	font-weight: 500;
+}
+
+
+@media (max-width: 960px) {
+	.site-header .primary-menu {
+		max-height: calc(100vh - 10rem);
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.site-header .primary-menu > li > a {
+		font-weight: 600;
 	}
 }
