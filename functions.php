@@ -214,3 +214,44 @@ add_filter('body_class', static function (array $classes): array {
 
     return $classes;
 });
+
+/**
+ * Performance hardening for frontend scripts and images.
+ */
+add_action('wp_enqueue_scripts', static function (): void {
+    foreach (['wildtours-base', 'wildtours-navigation', 'pwt-child-frontend'] as $handle) {
+        if (wp_script_is($handle, 'enqueued')) {
+            wp_script_add_data($handle, 'strategy', 'defer');
+        }
+    }
+
+    // The first/current post thumbnail is the likely LCP image; keep it eager.
+    // Other post thumbnails can use WordPress's normal lazy-loading behavior.
+}, 100);
+
+add_filter('wp_get_attachment_image_attributes', static function (array $attr, WP_Post $attachment): array {
+    if (!is_singular()) {
+        return $attr;
+    }
+
+    $thumbnailId = (int) get_post_thumbnail_id(get_queried_object_id());
+    if ($thumbnailId > 0 && (int) $attachment->ID === $thumbnailId) {
+        $attr['loading'] = 'eager';
+        $attr['fetchpriority'] = 'high';
+        $attr['decoding'] = 'async';
+    }
+
+    return $attr;
+}, 20, 2);
+
+/**
+ * Allow the browser to use responsive image candidates rather than a fixed
+ * intrinsic display size for full-width content images.
+ */
+add_filter('wp_calculate_image_sizes', static function (string $sizes, array $size, string $imageSrc, array $imageMeta, int $attachmentId): string {
+    if (is_singular()) {
+        return '(max-width: 960px) 100vw, 100vw';
+    }
+
+    return $sizes;
+}, 20, 5);

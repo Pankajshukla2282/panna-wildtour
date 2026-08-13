@@ -1,387 +1,181 @@
 /*
-Theme Name: Panna Wild Tours
-Description: Child theme frontend overrides for the Panna Wild Tour plugin experience.
-Version: 2.0.19
-Text Domain: wildtours-plugin
-*/
-
-/* Contact card refinement (scoped, gold accent used by the plugin). */
-.pwt-single-wrap .pwt-contact-card {
-	border-top-color: #c9a227;
-}
-
-.pwt-single-wrap .pwt-contact-list a {
-	font-weight: 600;
-}
-
-/* Booking form action row. */
-.pwt-booking-form .pwt-form-actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	align-items: center;
-}
-
-.pwt-booking-form .pwt-form-actions .pwt-notes {
-	font-size: 0.85rem;
-	color: #5d6a61;
-}
-
-/* Small screens: keep CTAs tappable. */
-@media (max-width: 480px) {
-	.pwt-booking-form .pwt-form-actions {
-		flex-direction: column;
-		align-items: stretch;
-	}
-}
-
-
-/*
- * Header/navigation refinements.
- * Parent navigation styles live in WildTours Base. These scoped rules
- * provide a consistent Panna Wild Tours presentation without replacing
- * the parent responsive behavior.
- */
-.site-header .site-title a,
-.site-header .site-title {
-	color: #172018;
-}
-
-.site-header .site-title a:hover,
-.site-header .site-title a:focus {
-	color: #1f5a32;
-}
-
-.site-header .primary-menu > li > a {
-	font-weight: 600;
-}
-
-.site-header .primary-menu .sub-menu a {
-	font-weight: 500;
-}
-
-
-@media (max-width: 960px) {
-	.site-header .primary-menu {
-		max-height: calc(100vh - 10rem);
-		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.site-header .primary-menu > li > a {
-		font-weight: 600;
-	}
-}
-
-
-/*
- * ================================================================
- * FULL-WIDTH LAYOUT OVERRIDES — Panna Wild Tours
- * ================================================================
- *
- * The base theme contains a 1200px site shell. These child-theme
- * overrides make the outer site truly edge-to-edge while keeping
- * Gutenberg content and components responsive.
+ * Panna Wild Tours — optimized frontend overrides.
+ * Version 2.1.0
  */
 
-/* Full-width root/site shell. */
-html,
-body {
-	width: 100%;
-	max-width: none;
-	margin: 0;
-	padding: 0;
+/* -------------------------------------------------------------------------
+ * Plugin content / forms
+ * ---------------------------------------------------------------------- */
+.pwt-single-wrap .pwt-contact-card { border-top-color: #c9a227; }
+.pwt-single-wrap .pwt-contact-list a { font-weight: 600; }
+.pwt-booking-form .pwt-form-actions { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+.pwt-booking-form .pwt-form-actions .pwt-notes { font-size:.85rem; color:#5d6a61; }
+@media (max-width:480px) {
+  .pwt-booking-form .pwt-form-actions { flex-direction:column; align-items:stretch; }
 }
 
+/* -------------------------------------------------------------------------
+ * Full-width, centered site shell
+ * ---------------------------------------------------------------------- */
+html, body { width:100%; max-width:none; margin:0; padding:0; }
 body #page,
 body .site,
 #page.site {
-	width: 100%;
-	max-width: none;
-	min-width: 0;
-	margin: 0;
-	padding: 0;
-	border-left: 0;
-	border-right: 0;
-	border-radius: 0;
-	overflow: visible;
+  width:100%; max-width:none; min-width:0; margin:0 auto; padding:0;
+  box-sizing:border-box; border-left:0; border-right:0; border-radius:0;
+  overflow:visible;
 }
-
-/* Full-width site chrome. */
-.site-header,
-.site-main,
-.site-footer,
-.content-area {
-	width: 100%;
-	max-width: none;
-	box-sizing: border-box;
-}
-
-/* Remove the theme's outer content constraint. */
-.site-main {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-.content-area {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-/* Gutenberg/root block wrappers must not re-introduce a 1200px limit. */
-.wp-site-blocks,
-.wp-site-blocks > *,
-.site-main > .wp-block-group,
-.entry-content > .wp-block-group {
-	width: 100%;
-	max-width: none;
-	box-sizing: border-box;
-}
-
-/* Constrained block layouts inherit the full-width content size. */
+.site-header, .site-main, .site-footer, .content-area { width:100%; max-width:none; box-sizing:border-box; }
+.site-header, .site-footer { margin-inline:auto; }
+.site-main { width:100%; margin-inline:auto; padding-inline:clamp(1rem,2vw,2rem); box-sizing:border-box; }
+.content-area { margin-inline:auto; }
+.wp-site-blocks, .wp-site-blocks > *, .site-main > .wp-block-group, .entry-content > .wp-block-group { width:100%; max-width:none; box-sizing:border-box; }
 .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)),
-.wp-site-blocks .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-	max-width: 100%;
+.wp-site-blocks .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) { max-width:100%; }
+.alignfull { width:100%; max-width:100%; margin-inline:0; box-sizing:border-box; }
+.site-main > .alignfull, .entry-content > .alignfull, .page-content > .alignfull { width:100%; max-width:100%; margin-inline:0; }
+body { overflow-x:clip; }
+
+/* -------------------------------------------------------------------------
+ * Dynamic content figures and images — no fixed offsets/cropping
+ * ---------------------------------------------------------------------- */
+.entry-content figure, .page-content figure,
+.entry-content .wp-block-image, .page-content .wp-block-image,
+.pwt-single-wrap figure {
+  width:auto !important; max-width:100% !important; min-width:0;
+  margin-top:1.5rem !important; margin-right:auto !important;
+  margin-bottom:1.5rem !important; margin-left:auto !important;
+  box-sizing:border-box; float:none !important; left:auto !important; right:auto !important;
+}
+.entry-content figure img, .page-content figure img,
+.entry-content .wp-block-image img, .page-content .wp-block-image img,
+.pwt-single-wrap figure img {
+  display:block; width:auto !important; max-width:100% !important; height:auto !important; min-width:0;
+  margin-left:auto !important; margin-right:auto !important;
+  object-fit:contain !important; object-position:center;
+  transform:none !important; clip-path:none !important; mask:none !important; border-radius:0 !important;
 }
 
-/* True edge-to-edge Gutenberg sections. */
-.alignfull,
-.wp-block-cover.alignfull,
-.wp-block-group.alignfull,
-.wp-block-image.alignfull,
-.wp-block-media-text.alignfull {
-	width: 100vw;
-	max-width: 100vw;
-	margin-left: 50%;
-	margin-right: -50%;
-	box-sizing: border-box;
+/* Featured / hero images: preserve natural aspect ratio. */
+.featured-image, .featured-image img,
+.post-thumbnail, .post-thumbnail img,
+.pwt-single-hero, .pwt-single-hero img {
+  width:100%; max-width:100%; min-width:0; box-sizing:border-box;
+}
+.featured-image, .post-thumbnail, .pwt-single-hero {
+  height:auto; min-height:0; max-height:none; overflow:visible;
+}
+.featured-image img, .post-thumbnail img, .pwt-single-hero img {
+  display:block; width:100%; height:auto; min-height:0; max-height:none;
+  margin:0; object-fit:contain; object-position:center; transform:none;
+  clip-path:none; mask:none;
+}
+.pwt-single-wrap { width:100%; max-width:none; min-width:0; margin-inline:auto; box-sizing:border-box; }
+.pwt-single-hero { margin-bottom:1.25rem; border-radius:0; overflow:visible; }
+
+/* -------------------------------------------------------------------------
+ * Navigation — identical hover/focus-within model at every breakpoint
+ * ---------------------------------------------------------------------- */
+.site-header .primary-menu li { position:relative; }
+.site-header .primary-menu li > .sub-menu {
+  box-sizing:border-box; list-style:none; margin:0; gap:0; row-gap:0; column-gap:0;
+}
+.site-header .primary-menu .sub-menu li {
+  margin:0; padding:0; gap:0; row-gap:0; column-gap:0;
+}
+.site-header .primary-menu .sub-menu a { box-sizing:border-box; margin:0; }
+.site-header .primary-menu li:hover > .sub-menu,
+.site-header .primary-menu li:focus-within > .sub-menu {
+  display:grid;
+}
+.site-header .primary-menu .sub-menu[hidden] { display:none; }
+.site-header .primary-menu li:hover > .sub-menu[hidden],
+.site-header .primary-menu li:focus-within > .sub-menu[hidden] { display:grid !important; }
+.site-header .site-title, .site-header .site-title a { color:#172018; }
+.site-header .site-title a:hover, .site-header .site-title a:focus { color:#1f5a32; }
+.site-header .primary-menu > li > a { font-weight:600; }
+.site-header .primary-menu .sub-menu a { font-weight:500; }
+
+@media (min-width:961px) {
+  /* Keep desktop dropdowns below their parent and nested panels beside it. */
+  .site-header .primary-menu .sub-menu {
+    width:max-content; min-width:12.5rem; max-width:min(32rem,80vw);
+    height:auto; max-height:none; overflow:visible;
+    align-content:start; grid-auto-rows:max-content;
+  }
+  .site-header .primary-menu .sub-menu li { display:block; width:100%; }
+  .site-header .primary-menu .sub-menu a { white-space:normal; }
+  .site-header .primary-menu .sub-menu .sub-menu {
+    width:max-content; min-width:12.5rem; max-width:min(32rem,80vw);
+    align-content:start; grid-auto-rows:max-content;
+  }
 }
 
-/*
- * When an alignfull block is already inside a full-width wrapper,
- * avoid accidental horizontal overflow.
- */
-.site-main > .alignfull,
-.entry-content > .alignfull,
-.page-content > .alignfull {
-	margin-left: 0;
-	margin-right: 0;
-	width: 100%;
-	max-width: 100%;
+/* -------------------------------------------------------------------------
+ * Mobile: title + hamburger + search in one row; submenu is an in-panel block
+ * ---------------------------------------------------------------------- */
+@media (max-width:960px) {
+  .site-header {
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-rows:auto auto;
+    align-items:center;
+    column-gap:.75rem;
+  }
+  .site-header .topbar { grid-column:1 / -1; grid-row:1; }
+  .site-header .site-branding { grid-column:1; grid-row:2; min-width:0; }
+  .site-header .site-title, .site-header .site-title a {
+    max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .site-header .site-description { display:none; }
+
+  .site-header .primary-navigation {
+    grid-column:2; grid-row:2;
+    display:grid; grid-template-columns:auto auto; grid-template-rows:auto auto;
+    align-items:center; justify-content:end; gap:.35rem; width:auto; min-width:0;
+  }
+  .site-header .primary-navigation > .menu-toggle {
+    grid-column:1; grid-row:1; justify-self:end; margin:0;
+  }
+  .site-header .header-search {
+    grid-column:2; grid-row:1; width:auto; min-width:0; margin:0; position:relative;
+  }
+  .site-header .header-search-toggle { display:inline-flex; margin:0; }
+  .site-header .header-search-panel {
+    position:absolute; top:calc(100% + .35rem); right:0; left:auto; z-index:100;
+    width:min(22rem, calc(100vw - 1rem)); max-width:calc(100vw - 1rem);
+    box-sizing:border-box; margin:0; padding:.45rem;
+    overflow:hidden;
+  }
+  .site-header .header-search .search-form { width:100%; display:flex; gap:.35rem; }
+  .site-header .header-search .search-field { flex:1 1 auto; width:auto; min-width:0; max-width:100%; }
+  .site-header .header-search .search-submit { flex:0 0 auto; }
+
+  .site-header .primary-menu {
+    grid-column:1 / -1; grid-row:2; width:100%; min-width:0;
+    max-height:calc(100vh - 7rem); overflow-y:auto; overflow-x:visible;
+    -webkit-overflow-scrolling:touch; align-content:start; grid-auto-rows:max-content;
+  }
+  .site-header .primary-menu > li { width:100%; margin:0; padding:0; }
+  .site-header .primary-menu > li > a { width:100%; }
+
+  .site-header .primary-menu .sub-menu {
+    position:static; display:none; width:100%; min-width:0; max-width:none;
+    height:auto; max-height:none; margin:.15rem 0 0; padding:.35rem 0 .35rem .75rem;
+    border-left:2px solid rgba(47,111,62,.18); border-radius:0;
+    background:rgba(247,249,245,.96); box-shadow:none;
+    align-content:start; grid-auto-rows:max-content; gap:0;
+  }
+  .site-header .primary-menu li:hover > .sub-menu,
+  .site-header .primary-menu li:focus-within > .sub-menu { display:grid; }
+  .site-header .primary-menu .sub-menu li { display:block; width:100%; min-width:0; margin:0; padding:0; }
+  .site-header .primary-menu .sub-menu a { width:100%; min-height:2rem; padding:.4rem .65rem; white-space:normal; }
+  .site-header .primary-menu .sub-menu .sub-menu {
+    position:static; width:100%; min-width:0; max-width:none; margin:.1rem 0 0;
+    padding-left:.65rem; border-left-color:rgba(47,111,62,.12);
+  }
+  .breadcrumbs { display:none; }
 }
 
-/* Full-width hero/media blocks. */
-.wp-block-cover,
-.wp-block-cover-image,
-.wp-block-media-text,
-.wp-block-gallery {
-	max-width: 100%;
-}
-
-/* Keep normal page text comfortable to read without constraining
- * the outer website. Individual blocks can still use their own
- * editor-defined max-width when required. */
-.entry-content,
-.page-content {
-	width: 100%;
-	max-width: none;
-	box-sizing: border-box;
-}
-
-/* Header/footer should span the complete browser width. */
-.site-header,
-.site-footer {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-/* Breadcrumbs span the available site width. */
-.breadcrumbs {
-	width: 100%;
-	max-width: none;
-	box-sizing: border-box;
-	margin-left: 0;
-	margin-right: 0;
-	border-left: 0;
-	border-right: 0;
-	border-radius: 0;
-}
-
-/* Avoid horizontal scrollbar caused by full-bleed content. */
-body {
-	overflow-x: hidden;
-}
-
-@media (max-width: 960px) {
-	#page.site,
-	body #page {
-		width: 100%;
-		max-width: none;
-		margin: 0;
-	}
-
-	.site-main,
-	.site-header,
-	.site-footer {
-		width: 100%;
-	}
-}
-
-
-/*
- * Featured-image fixes.
- *
- * Full-width layouts must never turn a featured image into a cropped
- * background. Preserve the complete source image and let its natural
- * aspect ratio determine the rendered height.
- */
-.featured-image,
-.featured-image img,
-.post-thumbnail,
-.post-thumbnail img,
-.pwt-single-hero,
-.pwt-single-hero img {
-	width: 100% !important;
-	max-width: 100% !important;
-	box-sizing: border-box;
-}
-
-.featured-image,
-.post-thumbnail,
-.pwt-single-hero {
-	height: auto !important;
-	min-height: 0 !important;
-	overflow: hidden;
-}
-
-.featured-image img,
-.post-thumbnail img,
-.pwt-single-hero img {
-	display: block;
-	height: auto !important;
-	min-height: 0 !important;
-	max-height: none !important;
-	object-fit: contain !important;
-	object-position: center center !important;
-	transform: none !important;
-}
-
-/* PWT hero images should show the entire photograph, not a fixed-height crop. */
-.pwt-single-wrap {
-	width: 100%;
-	max-width: none;
-	margin-left: 0;
-	margin-right: 0;
-	box-sizing: border-box;
-}
-
-.pwt-single-hero {
-	margin-bottom: 1.25rem;
-}
-
-/* Mobile header controls: hamburger + search on the SAME row. */
-@media (max-width: 960px) {
-	.site-header .primary-navigation {
-		display: grid;
-		grid-template-columns: auto minmax(0, 1fr) auto;
-		grid-template-rows: auto auto;
-		align-items: center;
-		gap: 0.4rem;
-		position: relative;
-		width: 100%;
-	}
-
-	/* Hamburger stays on the left of the mobile controls row. */
-	.site-header .primary-navigation > .menu-toggle {
-		grid-column: 1 !important;
-		grid-row: 1 !important;
-		justify-self: start !important;
-		align-self: center;
-		margin: 0 !important;
-	}
-
-	/* Search icon sits directly beside the hamburger. */
-	.site-header .header-search {
-		display: block;
-		grid-column: 2 !important;
-		grid-row: 1 !important;
-		justify-self: start;
-		width: auto !important;
-		margin: 0 !important;
-		position: relative;
-	}
-
-	.site-header .header-search-toggle {
-		display: inline-flex !important;
-		margin: 0 !important;
-		min-width: 2.35rem;
-		min-height: 2.35rem;
-		padding: 0.4rem 0.55rem;
-	}
-
-	/* Search box opens without creating another layout row. */
-	.site-header .header-search-panel {
-		position: absolute;
-		top: calc(100% + 0.35rem);
-		right: 0;
-		left: auto;
-		z-index: 100;
-		width: min(88vw, 22rem);
-		max-width: calc(100vw - 1rem);
-		margin: 0;
-		padding: 0.45rem;
-		border: 1px solid var(--wt-color-border);
-		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.98);
-		box-shadow: 0 18px 42px rgba(15, 26, 18, 0.14);
-	}
-
-	.site-header .header-search .search-form {
-		display: flex;
-		width: 100%;
-		gap: 0.35rem;
-	}
-
-	.site-header .header-search .search-field {
-		width: 100%;
-		min-width: 0;
-		min-height: 2rem;
-		padding: 0.4rem 0.65rem;
-	}
-
-	.site-header .header-search .search-submit {
-		min-height: 2rem;
-		padding: 0.4rem 0.7rem;
-	}
-
-	/* Navigation opens below the compact controls row. */
-	.site-header .primary-menu {
-		grid-column: 1 / -1 !important;
-		grid-row: 2 !important;
-		width: 100%;
-	}
-
-	/* Do not reserve space for the old mobile breadcrumb treatment. */
-	.site-header .mobile-inline-breadcrumb,
-	body:not(.home):not(.front-page) > #page > .breadcrumbs {
-		display: none !important;
-	}
-}
-
-/* Keep featured/hero images uncropped after all inherited theme rules. */
-.featured-image img,
-.post-thumbnail img,
-.pwt-single-hero img {
-	display: block;
-	width: 100% !important;
-	height: auto !important;
-	min-height: 0 !important;
-	max-height: none !important;
-	object-fit: contain !important;
-	object-position: center center !important;
-}
-
-.pwt-single-hero {
-	height: auto !important;
-	min-height: 0 !important;
+@media (prefers-reduced-motion:reduce) {
+  .site-header .primary-menu a { transition:none; }
 }

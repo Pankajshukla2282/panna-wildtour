@@ -1,7 +1,7 @@
 /**
  * Theme Name: Panna Wild Tours
  * Description: Child theme frontend behavior for the Panna Wild Tour plugin.
- * Version: 2.0.17
+ * Version: 2.1.0
  */
 (function () {
 	'use strict';
