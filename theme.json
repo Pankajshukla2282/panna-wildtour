@@ -15,6 +15,10 @@
           "name": "PWT Earth"
         }
       ]
+    },
+    "layout": {
+      "contentSize": "100%",
+      "wideSize": "100%"
     }
   },
   "styles": {
@@ -23,6 +27,12 @@
         "color": {
           "text": "var(--wp--preset--color--pwt-forest)"
         }
+      }
+    },
+    "spacing": {
+      "padding": {
+        "left": "0",
+        "right": "0"
       }
     }
   }
