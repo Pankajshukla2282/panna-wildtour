@@ -20,3 +20,13 @@
         box-shadow: 0 18px 40px rgba(18, 53, 36, 0.10);
     }
 }
+
+/* Optional two-column dropdown for wide submenus (e.g. Experiences with 8 children).
+   In WP Admin > Appearance > Menus, add the CSS class "menu-mega" to the parent item.
+   Display is still toggled by the base theme's hover/focus-within rules. */
+@media (min-width: 1024px) {
+    .site-header .primary-menu > li.menu-mega > .sub-menu {
+        grid-template-columns: repeat(2, minmax(180px, 220px));
+        width: max-content;
+    }
+}
