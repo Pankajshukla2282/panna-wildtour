@@ -35,8 +35,8 @@
 /* Site-specific layout guardrails. Keep plugin content aligned with the base theme reading column. */
 .pwt-site,
 .pwt-single-wrap {
-    width: min(100%, var(--wt-content-width, 1200px));
-    max-width: var(--wt-content-width, 1200px);
+    width: min(100%, var(--wt-content-width, 1440px));
+    max-width: var(--wt-content-width, 1440px);
     margin-inline: auto;
 }
 
