@@ -30,3 +30,39 @@
         width: max-content;
     }
 }
+
+
+/* Site-specific layout guardrails. Keep plugin content aligned with the base theme reading column. */
+.pwt-site,
+.pwt-single-wrap {
+    width: min(100%, var(--wt-content-width, 1200px));
+    max-width: var(--wt-content-width, 1200px);
+    margin-inline: auto;
+}
+
+.pwt-single-wrap {
+    padding-inline: 0;
+}
+
+.pwt-booking-form .pwt-form-message {
+    min-height: 1.5rem;
+}
+
+.pwt-booking-form [aria-invalid="true"] {
+    border-color: #b42318;
+}
+
+.pwt-booking-form .pwt-form-message.is-error {
+    color: #b42318;
+}
+
+.pwt-booking-form .pwt-form-message.is-success {
+    color: var(--wt-color-primary-dark, #1f4e2c);
+}
+
+@media (max-width: 720px) {
+    .pwt-site,
+    .pwt-single-wrap {
+        width: min(100%, calc(100% - 2rem));
+    }
+}
