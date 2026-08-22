@@ -2,6 +2,10 @@
 
 .pwt-single-wrap .pwt-contact-card {
     border-top-color: #c9a227;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 30px);
 }
 
 .pwt-single-wrap .pwt-contact-list a {
@@ -11,7 +15,7 @@
 .pwt-booking-form .pwt-form-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 2vw, 0.75rem);
     align-items: center;
 }
 
@@ -19,6 +23,10 @@
     .pwt-single-wrap .pwt-contact-card {
         box-shadow: 0 18px 40px rgba(18, 53, 36, 0.10);
     }
+}
+
+.pwt-single-wrap .pwt-contact-card {
+    transition: box-shadow 0.3s ease;
 }
 
 /* Optional two-column dropdown for wide submenus (e.g. Experiences with 8 children).
@@ -36,7 +44,7 @@
 .pwt-site,
 .pwt-single-wrap {
     width: min(100%, var(--wt-content-width, 1440px));
-    max-width: var(--wt-content-width, 1440px);
+    max-width: min(var(--wt-content-width, 1440px), 100%);
     margin-inline: auto;
 }
 
@@ -45,7 +53,7 @@
 }
 
 .pwt-booking-form .pwt-form-message {
-    min-height: 1.5rem;
+    min-height: clamp(1.5rem, 3vw, 2rem);
 }
 
 .pwt-booking-form [aria-invalid="true"] {
@@ -64,5 +72,12 @@
     .pwt-site,
     .pwt-single-wrap {
         width: min(100%, calc(100% - 2rem));
+    }
+}
+
+@media (max-width: 480px) {
+    .pwt-site,
+    .pwt-single-wrap {
+        padding: 0 1rem;
     }
 }
